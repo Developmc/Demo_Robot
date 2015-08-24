@@ -8,10 +8,10 @@
     <string name="send">发送</string>
 
     <string-array name="welcome_tips">
-        <item>sb1</item>
-        <item>sb2</item>
-        <item>sb3</item>
-        <item>sb4</item>
-        <item>sb5</item>
+        <item>Hi</item>
+        <item>Hi,Hi</item>
+        <item>Hi,我是小帅哥</item>
+        <item>你看，有UFO</item>
+        <item>Nice to see you,亲</item>
     </string-array>
 </resources>
