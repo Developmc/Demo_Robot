@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Robot</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="send">发送</string>
+
+    <string-array name="welcome_tips">
+        <item>sb1</item>
+        <item>sb2</item>
+        <item>sb3</item>
+        <item>sb4</item>
+        <item>sb5</item>
+    </string-array>
+</resources>
