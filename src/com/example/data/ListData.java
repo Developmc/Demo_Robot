@@ -1,10 +1,14 @@
 package com.example.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.v4.os.ParcelableCompat;
+
 /**封装数据
  * @author Devel_000
  *
  */
-public class ListData {
+public class ListData implements Parcelable{
 
 	private String content ;
 	public static final int SEND = 1 ;
@@ -37,5 +41,15 @@ public class ListData {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
 	}
 }

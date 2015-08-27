@@ -1,5 +1,4 @@
 package com.example.robot;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,16 +17,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
-
 public class MainActivity extends Activity implements HttpGetDataListener,
-OnClickListener{
+    OnClickListener{
 
 	private HttpData httpData ;
 	private List<ListData> lists ;
@@ -42,7 +40,7 @@ OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView() ;
+        initView(savedInstanceState) ;
     }
 
 	@Override
@@ -52,18 +50,24 @@ OnClickListener{
 		parseText(data) ;
 	}
 	
-	public void initView()
+	public void initView(Bundle savedInstanceState)
 	{
 		lv = (ListView)findViewById(R.id.lv) ;
 		sendText = (EditText)findViewById(R.id.sendText) ;
 		send_btn = (Button)findViewById(R.id.send_btn) ;
 		lists = new ArrayList<ListData>() ;
 		send_btn.setOnClickListener(this);
+		//横竖屏数据保存
+	    if(savedInstanceState==null)
+		{
+			ListData data = new ListData(getRandomWelcomeTips(), ListData.RECEIVER,getTime()) ;
+		    lists.add(data) ;
+		}
+	    else {
+	    	lists=savedInstanceState.getParcelableArrayList("data") ;
+		}
 	    adapter = new Adapter(lists, this) ;
 	    lv.setAdapter(adapter) ;
-	    //打印欢迎语
-	    ListData data = new ListData(getRandomWelcomeTips(), ListData.RECEIVER,getTime()) ;
-	    lists.add(data) ;
 	    
 	}
 	
@@ -140,5 +144,26 @@ OnClickListener{
              return networkInfo.isAvailable();
         }
         return false ;
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onRestoreInstanceState(android.os.Bundle)
+	 */
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onRestoreInstanceState(savedInstanceState);
+		
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
+	 */
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList("data", (ArrayList<? extends Parcelable>) lists) ;
 	}
 }
